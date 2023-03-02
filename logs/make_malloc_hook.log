@@ -1,0 +1,9 @@
+rm -rf main.o pipex.o pipe_handling.o here_doc.o files.o tab.o path.o 
+rm -rf pipex  *.o
+clang -o main.o -c main.c -g
+clang -o pipex.o -c pipex.c -g
+clang -o pipe_handling.o -c pipe_handling.c -g
+clang -o here_doc.o -c here_doc.c -g
+clang -o files.o -c files.c -g
+clang -o tab.o -c tab.c -g
+clang -o path.o -c path.c -g

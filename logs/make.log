@@ -1,0 +1,24 @@
+cp: cannot stat 'libmallocator.a': No such file or directory
+make: Entering directory '/mnt/nfs/homes/pcheron/Documents/easy_pipex'
+clang -Wall -Werror -Wextra -g -fsanitize=undefined -rdynamic -o malloc_test main.o pipex.o pipe_handling.o here_doc.o files.o tab.o path.o libft/libft.a -I./libft/ -L. -lmallocator 
+/usr/bin/ld: cannot find -lmallocator: No such file or directory
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+make: *** [Makefile:86: malloc_test] Error 1
+make: Leaving directory '/mnt/nfs/homes/pcheron/Documents/easy_pipex'
+make: Entering directory '/mnt/nfs/homes/pcheron/Documents/easy_pipex'
+rm -rf main.o pipex.o pipe_handling.o here_doc.o files.o tab.o path.o 
+rm -rf pipex  *.o
+make: Leaving directory '/mnt/nfs/homes/pcheron/Documents/easy_pipex'
+make: Entering directory '/mnt/nfs/homes/pcheron/Documents/easy_pipex'
+clang -o main.o -c main.c -g
+clang -o pipex.o -c pipex.c -g
+clang -o pipe_handling.o -c pipe_handling.c -g
+clang -o here_doc.o -c here_doc.c -g
+clang -o files.o -c files.c -g
+clang -o tab.o -c tab.c -g
+clang -o path.o -c path.c -g
+clang -Wall -Werror -Wextra -g -fsanitize=undefined -rdynamic -o malloc_test main.o pipex.o pipe_handling.o here_doc.o files.o tab.o path.o libft/libft.a -I./libft/ -L. -lmallocator 
+/usr/bin/ld: cannot find -lmallocator: No such file or directory
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+make: *** [Makefile:86: malloc_test] Error 1
+make: Leaving directory '/mnt/nfs/homes/pcheron/Documents/easy_pipex'
