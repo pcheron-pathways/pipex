@@ -6,7 +6,7 @@
 /*   By: pcheron <pcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:57:31 by pcheron           #+#    #+#             */
-/*   Updated: 2023/03/03 12:22:27 by pcheron          ###   ########.fr       */
+/*   Updated: 2023/03/03 12:23:42 by pcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,16 @@ int	ft_child(t_tab *tab, char **env, int i)
 			dup2(tab->pipes[i][1], STDOUT_FILENO);
 		else
 			dup2(tab->fd[1], STDOUT_FILENO);
-		// path = ft_find_way(tab->env_path, tab->cmd[1][0]);
-		// if (!path)
-		// 	return(ft_free_tab(&tab), 127);
-		// execve(path, tab->cmd[i], env);
+		if (ft_instr(tab->cmd[i][0], '/'))
+			execve(tab->cmd[i][0], tab->cmd[i], env); // care you must delete
+														//everything before last '/' in tab->cmd[i][0]
+		else
+		{
+			path = ft_find_way(tab->env_path, tab->cmd[1][0]);
+			// if (!path)
+			// 	return(ft_free_tab(&tab), 127);
+		}
+		execve(path, tab->cmd[i], env);
 	}
 	return (p_id);
 }

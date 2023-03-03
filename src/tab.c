@@ -6,11 +6,11 @@
 /*   By: pcheron <pcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 11:40:43 by pcheron           #+#    #+#             */
-/*   Updated: 2023/03/03 08:42:22 by pcheron          ###   ########.fr       */
+/*   Updated: 2023/03/03 12:28:48 by pcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../include/pipex.h"
 
 static char	**ft_build_env_path(char **env)
 {
