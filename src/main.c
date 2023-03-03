@@ -6,7 +6,7 @@
 /*   By: pcheron <pcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:57:31 by pcheron           #+#    #+#             */
-/*   Updated: 2023/03/03 08:41:04 by pcheron          ###   ########.fr       */
+/*   Updated: 2023/03/03 12:22:27 by pcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	ft_return_status(pid_t last_pid, int wstatus)
 	while (true)
 	{
 		wpid = wait(&wstatus);
-		if (wpid < 0)
+		if (wpid < 0) // care, look at axel's messages for improve
 			break ;
 		if (wpid == last_pid)
 		{
@@ -97,8 +97,6 @@ int	main(int argc, char **argv, char **env)
 	tab = ft_make_tab(argc, argv, env);
 	if (!tab)
 		return (EXIT_FAILURE); // print allocation failed
-	// printf("%s\n", ft_find_way(tab->env_path, tab->cmd[0][0]));
-	// printab(tab);
 	i = -1;
 	while (tab->cmd[++i])
 		last_pid = ft_child(tab, env, i);
