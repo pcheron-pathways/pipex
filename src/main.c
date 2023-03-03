@@ -6,7 +6,7 @@
 /*   By: pcheron <pcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:57:31 by pcheron           #+#    #+#             */
-/*   Updated: 2023/03/03 12:23:42 by pcheron          ###   ########.fr       */
+/*   Updated: 2023/03/03 15:04:52 by pcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_child(t_tab *tab, char **env, int i)
 			dup2(tab->fd[1], STDOUT_FILENO);
 		if (ft_instr(tab->cmd[i][0], '/'))
 			execve(tab->cmd[i][0], tab->cmd[i], env); // care you must delete
-														//everything before last '/' in tab->cmd[i][0]
+														// delete everything before last '/' in tab->cmd[i][0]
 		else
 		{
 			path = ft_find_way(tab->env_path, tab->cmd[1][0]);
@@ -107,5 +107,5 @@ int	main(int argc, char **argv, char **env)
 	while (tab->cmd[++i])
 		last_pid = ft_child(tab, env, i);
 	ft_free_tab(&tab);
-	return (ft_return_status(last_pid, wstatus));
+	return (ft_return_status(last_pid, 4)); // replace 4 by wstatus
 }

@@ -10,12 +10,10 @@ SAN = -fsanitize=address
 
 # sources
 SRC =	src/main.c \
-# 		src/pipex.c \
-# 		src/pipe_handling.c \
-# 		src/here_doc.c \
-# 		src/files.c \
-# 		src/tab.c \
-# 		src/path.c 
+		src/pipe_handling.c \
+		src/files.c \
+		src/tab.c \
+		src/path.c 
 SRC_BONUS = 
 OBJ = $(SRC:.c=.o)
 OBJ_BONUS = $(SRC_BONUS:.c=.o)

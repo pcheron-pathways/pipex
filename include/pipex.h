@@ -6,14 +6,14 @@
 /*   By: pcheron <pcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 14:34:22 by pcheron           #+#    #+#             */
-/*   Updated: 2023/03/03 12:30:02 by pcheron          ###   ########.fr       */
+/*   Updated: 2023/03/03 15:03:00 by pcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include "libft/libft.h"
+# include "../libft/include/libft.h"
 # include <errno.h>
 # include <fcntl.h>
 # include <stdbool.h>
@@ -40,20 +40,18 @@ typedef struct s_tab
 
 // build tab
 t_tab		*ft_make_tab(int argc, char **argv, char **env);
-char		*ft_find_way(char **path, char *cmd);
 void		ft_free_tab(t_tab **tab);
 
 // files and fd
 char		**ft_build_files(int argc, char **argv);
 int			*ft_build_fd(char **files);
 
+// find path
+char		*ft_find_way(char **path, char *cmd);
+
 // pipes
-int			ft_pipex(t_tab *tab, char **env);
 int			**ft_build_pipes(int nbr);
 void		ft_free_pipes(int nbr, int **pipes);
 void		ft_close_pipes(int nbr, int **pipes);
-
-// exec and status
-ft_return_status(pid_t last_pid, int wstatus);
 
 #endif

@@ -6,11 +6,11 @@
 /*   By: pcheron <pcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 11:29:41 by pcheron           #+#    #+#             */
-/*   Updated: 2023/02/22 18:41:16 by pcheron          ###   ########.fr       */
+/*   Updated: 2023/03/03 15:05:11 by pcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../include/pipex.h"
 
 // Create an array of nbr malloc'ed pipes
 // Return 1 if a malloc error is encountered
