@@ -6,7 +6,7 @@
 /*   By: pcheron <pcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:57:31 by pcheron           #+#    #+#             */
-/*   Updated: 2023/03/03 15:04:52 by pcheron          ###   ########.fr       */
+/*   Updated: 2023/03/06 13:30:57 by pcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 // 	}
 // }
 
-int	ft_child(t_tab *tab, char **env, int i)
+pid_t	ft_child(t_tab *tab, char **env, int i)
 {
 	pid_t	p_id;
 	char	*path;
