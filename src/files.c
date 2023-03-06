@@ -6,7 +6,7 @@
 /*   By: pcheron <pcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 11:01:40 by pcheron           #+#    #+#             */
-/*   Updated: 2023/03/06 15:35:29 by pcheron          ###   ########.fr       */
+/*   Updated: 2023/03/06 16:53:12 by pcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ static int	ft_open_first_file(char *file1)
 	fd = open(file1, O_RDONLY);
 	if (fd > 0)
 		return (fd);
-	ft_putstr_fd("no such file or directory: ", 2);
-	ft_putstr_fd(file1, 2);
-	ft_putstr_fd("\n", 2);
+	ft_print_fd(2, "no such file or directory: %s\n", file1);
 	return (-1);
 }
 

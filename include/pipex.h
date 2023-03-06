@@ -6,7 +6,7 @@
 /*   By: pcheron <pcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 14:34:22 by pcheron           #+#    #+#             */
-/*   Updated: 2023/03/03 15:03:00 by pcheron          ###   ########.fr       */
+/*   Updated: 2023/03/06 18:17:22 by pcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int			*ft_build_fd(char **files);
 
 // find path
 char		*ft_find_way(char **path, char *cmd);
+char		**ft_tronc_path(char **cmd);
 
 // pipes
 int			**ft_build_pipes(int nbr);

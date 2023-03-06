@@ -6,7 +6,7 @@
 /*   By: pcheron <pcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:54:11 by pcheron           #+#    #+#             */
-/*   Updated: 2023/03/06 15:02:17 by pcheron          ###   ########.fr       */
+/*   Updated: 2023/03/06 18:18:56 by pcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,23 @@ char	*ft_find_way(char **path, char *cmd)
 	// ft_putstr_fd(cmd, 2);
 	// ft_putstr_fd("\n", 2);
 	return (NULL);
+}
+
+char	**ft_tronc_path(char **cmd)
+{
+	int	i;
+
+	i = ft_strlen(cmd[0]) - 1;
+	while (i >= 0)
+	{
+		if (cmd[0][i] == '/')
+			break ;
+		i--;
+	}
+	while (i > 0)
+	{
+		cmd[0]++;
+		i--;
+	}
+	return (cmd);
 }

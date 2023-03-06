@@ -6,7 +6,7 @@
 /*   By: pcheron <pcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:57:31 by pcheron           #+#    #+#             */
-/*   Updated: 2023/03/06 15:27:41 by pcheron          ###   ########.fr       */
+/*   Updated: 2023/03/06 18:46:54 by pcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	printab(t_tab *tab)
 	}
 }
 
+// si pas les droits du file in pas d'exec de la premiere commande
 pid_t	ft_child(t_tab *tab, char **env, int i)
 {
 	pid_t	p_id;
@@ -57,7 +58,7 @@ pid_t	ft_child(t_tab *tab, char **env, int i)
 			dup2(tab->fd[1], STDOUT_FILENO);
 		if (ft_instr(tab->cmd[i][0], '/'))
 			execve(tab->cmd[i][0], tab->cmd[i], env); // care you must delete
-														// delete everything before last '/' in tab->cmd[i][0]
+														// everything before last '/' in tab->cmd[i][0]
 		else
 		{
 			path = ft_find_way(tab->env_path, tab->cmd[i][0]);
@@ -99,10 +100,11 @@ int	main(int argc, char **argv, char **env)
 	int		i;
 
 	if (argc != 5)
-		return (EXIT_FAILURE); // print syntax : ./pipex file1 cmd1 cmd2 file2
+		return (ft_print_fd(2, "syntax : ./pipex file1 cmd1 cmd2 file2\n"),
+				EXIT_FAILURE);
 	tab = ft_make_tab(argc, argv, env);
 	if (!tab)
-		return (EXIT_FAILURE); // print allocation failed
+		return (ft_print_fd(2, "allocation failed\n"), EXIT_FAILURE);
 	// printab(tab);
 	i = -1;
 	while (tab->cmd[++i])
