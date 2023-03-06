@@ -6,7 +6,7 @@
 /*   By: pcheron <pcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:54:11 by pcheron           #+#    #+#             */
-/*   Updated: 2023/03/03 12:28:56 by pcheron          ###   ########.fr       */
+/*   Updated: 2023/03/06 15:02:17 by pcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ char	*ft_find_way(char **path, char *cmd)
 		else
 			free(way);
 	}
-	ft_putstr_fd("pipex: command not found: ", 2);
-	ft_putstr_fd(cmd, 2);
-	ft_putstr_fd("\n", 2);
+	// ft_putstr_fd("pipex: command not found: ", 2);
+	// ft_putstr_fd(cmd, 2);
+	// ft_putstr_fd("\n", 2);
 	return (NULL);
 }

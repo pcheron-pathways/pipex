@@ -1,9 +1,0 @@
-bin
-files
-include
-libft
-logs
-Makefile
-mallocator
-pipex
-src

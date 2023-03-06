@@ -6,38 +6,38 @@
 /*   By: pcheron <pcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:57:31 by pcheron           #+#    #+#             */
-/*   Updated: 2023/03/06 13:30:57 by pcheron          ###   ########.fr       */
+/*   Updated: 2023/03/06 15:27:41 by pcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-// void	printab(t_tab *tab)
-// {
-// 	int	i;
-// 	int	j;
+void	printab(t_tab *tab)
+{
+	int	i;
+	int	j;
 
-// 	i = -1;
-// 	printf("----- env path -----\n");
-// 	while (tab->env_path[++i])
-// 		printf("%s\n", tab->env_path[i]);
-// 	printf("----- files -----\n");
-// 	printf("fd1 :%d\nfd2 :%d\n", tab->fd[0], tab->fd[1]);
-// 	printf("f1 :%s\nf2 :%s\n", tab->files[0], tab->files[1]);
-// 	printf("----- pipes -----\n");
-// 	i = -1;
-// 	while (++i < tab->nb_pipes)
-// 		printf("%d : %d\n", tab->pipes[i][0], tab->pipes[i][1]);
-// 	printf("----- cmds -----\n");
-// 	i = -1;
-// 	while (tab->cmd[++i])
-// 	{
-// 		j = -1;
-// 		printf("- commands %d -\n", i);
-// 		while (tab->cmd[i][++j])
-// 			printf("%s\n", tab->cmd[i][j]);
-// 	}
-// }
+	i = -1;
+	printf("----- env path -----\n");
+	while (tab->env_path[++i])
+		printf("%s\n", tab->env_path[i]);
+	printf("----- files -----\n");
+	printf("fd1 :%d\nfd2 :%d\n", tab->fd[0], tab->fd[1]);
+	printf("f1 :%s\nf2 :%s\n", tab->files[0], tab->files[1]);
+	printf("----- pipes -----\n");
+	i = -1;
+	while (++i < tab->nb_pipes)
+		printf("%d : %d\n", tab->pipes[i][0], tab->pipes[i][1]);
+	printf("----- cmds -----\n");
+	i = -1;
+	while (tab->cmd[++i])
+	{
+		j = -1;
+		printf("- commands %d -\n", i);
+		while (tab->cmd[i][++j])
+			printf("%s\n", tab->cmd[i][j]);
+	}
+}
 
 pid_t	ft_child(t_tab *tab, char **env, int i)
 {
@@ -60,11 +60,11 @@ pid_t	ft_child(t_tab *tab, char **env, int i)
 														// delete everything before last '/' in tab->cmd[i][0]
 		else
 		{
-			path = ft_find_way(tab->env_path, tab->cmd[1][0]);
-			// if (!path)
+			path = ft_find_way(tab->env_path, tab->cmd[i][0]);
+			execve(path, tab->cmd[i], env);
 			// 	return(ft_free_tab(&tab), 127);
 		}
-		execve(path, tab->cmd[i], env);
+		ft_print_fd(2, "pipex: command not found: %s\n", tab->cmd[i][0]);
 	}
 	return (p_id);
 }
@@ -78,7 +78,7 @@ int	ft_return_status(pid_t last_pid, int wstatus)
 	while (true)
 	{
 		wpid = wait(&wstatus);
-		if (wpid < 0) // care, look at axel's messages for improve
+		if (wpid < 0)
 			break ;
 		if (wpid == last_pid)
 		{
@@ -103,9 +103,16 @@ int	main(int argc, char **argv, char **env)
 	tab = ft_make_tab(argc, argv, env);
 	if (!tab)
 		return (EXIT_FAILURE); // print allocation failed
+	// printab(tab);
 	i = -1;
 	while (tab->cmd[++i])
+	{
 		last_pid = ft_child(tab, env, i);
+		if (last_pid < 0)
+			ft_print_fd(2, "fork error\n");
+		if (!last_pid)
+			break ;
+	}
 	ft_free_tab(&tab);
 	return (ft_return_status(last_pid, 4)); // replace 4 by wstatus
 }
