@@ -6,7 +6,7 @@
 /*   By: pcheron <pcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:57:31 by pcheron           #+#    #+#             */
-/*   Updated: 2023/03/06 18:46:54 by pcheron          ###   ########.fr       */
+/*   Updated: 2023/03/06 18:58:48 by pcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,6 @@ int	main(int argc, char **argv, char **env)
 			break ;
 	}
 	ft_free_tab(&tab);
-	return (ft_return_status(last_pid, 4)); // replace 4 by wstatus
+	return (0);
+	// return (ft_return_status(last_pid, 4)); // replace 4 by wstatus
 }
