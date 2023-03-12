@@ -6,7 +6,7 @@
 /*   By: pcheron <pcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 11:40:43 by pcheron           #+#    #+#             */
-/*   Updated: 2023/03/06 18:59:40 by pcheron          ###   ########.fr       */
+/*   Updated: 2023/03/09 18:44:08 by pcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,10 @@ void	ft_free_tab(t_tab **tab)
 	free((*tab)->cmd);
 	ft_close_pipes(1, (*tab)->pipes);
 	ft_free_pipes(1, (*tab)->pipes);
+	if ((*tab)->fd[0] > 0)
+		close((*tab)->fd[0]);
+	if ((*tab)->fd[1] > 0)
+		close((*tab)->fd[1]);
 	free((*tab)->fd);
 	ft_free_strs((*tab)->files, 2);
 	i = 0;

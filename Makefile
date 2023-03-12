@@ -81,8 +81,9 @@ $(NAME) : $(LIBFT) $(OBJ)
 	@echo "$(_WHITE),,,,,,,,,$(_GREEN)@@,,,((,,,,,,,,((,,,(((((,,/((,,@@@$(_END),,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,$(_GREY)%#(##########(((((/**,*//(///////(//((/**/($(_END),,,,,$(_END)"
 
 malloc_test : $(LIBFT) $(OBJ) $(NAME)
-	$(CC) $(CFLAGS) -fsanitize=undefined -rdynamic -o $@ ${OBJ} $(LIBFT) $(INC_LIB) -L. -lmallocator 
+	$(CC) $(CFLAGS) -o $@ ${OBJ} $(LIBFT) $(INC_LIB) -L. -lmallocator 
 
+# -fsanitize=undefined -rdynamic
 bonus : $(OBJ_BONUS)
 	$(CC) $(CFLAGS) $^ -o $(BONUS)
 

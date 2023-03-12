@@ -6,7 +6,7 @@
 /*   By: pcheron <pcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 11:01:40 by pcheron           #+#    #+#             */
-/*   Updated: 2023/03/06 16:53:12 by pcheron          ###   ########.fr       */
+/*   Updated: 2023/03/09 18:42:03 by pcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ static int	ft_open_first_file(char *file1)
 static int	ft_open_last_file(char *file2)
 {
 	// if (hd_status)	// replace by heredoc function
-	return (open(file2, O_CREAT | O_RDWR | O_TRUNC));
+	// access(file2, X_OK); // care if file_out exist but you don't have rights
+	return (open(file2, O_CREAT | O_RDWR | O_TRUNC, 0644)); // ! change les droits du fichier
+	// return (open(file2, O_CREAT | O_RDWR | O_TRUNC, 0644));
 }
 
 int	*ft_build_fd(char **files)

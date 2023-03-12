@@ -6,7 +6,7 @@
 /*   By: pcheron <pcheron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:57:31 by pcheron           #+#    #+#             */
-/*   Updated: 2023/03/06 18:58:48 by pcheron          ###   ########.fr       */
+/*   Updated: 2023/03/12 14:37:12 by pcheron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ pid_t	ft_child(t_tab *tab, char **env, int i)
 			dup2(tab->pipes[i][1], STDOUT_FILENO);
 		else
 			dup2(tab->fd[1], STDOUT_FILENO);
+		// close(tab->fd[1]);
+		// close(tab->fd[0]);
 		if (ft_instr(tab->cmd[i][0], '/'))
 			execve(tab->cmd[i][0], tab->cmd[i], env); // care you must delete
 														// everything before last '/' in tab->cmd[i][0]
@@ -66,31 +68,56 @@ pid_t	ft_child(t_tab *tab, char **env, int i)
 			// 	return(ft_free_tab(&tab), 127);
 		}
 		ft_print_fd(2, "pipex: command not found: %s\n", tab->cmd[i][0]);
+		exit(0);
 	}
 	return (p_id);
 }
 
-int	ft_return_status(pid_t last_pid, int wstatus)
-{
-	pid_t	wpid;
-	int		return_status;
-	int		return_value;
+// v2 pablo
+// int	ft_return_status(pid_t last_pid, t_tab *tab)
+// {
+// 	pid_t	wpid;
+// 	int		return_status;
+// 	int		return_value;
 
-	while (true)
-	{
-		wpid = wait(&wstatus);
-		if (wpid < 0)
-			break ;
-		if (wpid == last_pid)
-		{
-			if (WIFEXITED(wstatus))
-				return_value = WEXITSTATUS(wstatus);
-			else
-				return_value = 128 + WTERMSIG(wstatus);
-		}
-	}
-	return (return_value);
-}
+// 	while (true)
+// 	{
+// 		wpid = wait(&tab->wstatus);
+// 		if (wpid < 0)
+// 			break ;
+// 		if (wpid == last_pid)
+// 		{
+// 			if (WIFEXITED(wstatus))
+// 				return_value = WEXITSTATUS(wstatus);
+// 			else
+// 				return_value = 128 + WTERMSIG(wstatus);
+// 		}
+// 	}
+// 	return (return_value);
+// }
+
+// v1 Axel
+// int	ft_return_status(pid_t last_pid, int wstatus)
+// {
+// 	pid_t	wpid;
+// 	int		return_status;
+// 	int		return_value;
+
+// 	while (true)
+// 	{
+// 		wpid = wait(&wstatus);
+// 		if (wpid < 0)
+// 			break ;
+// 		if (wpid == last_pid)
+// 		{
+// 			if (WIFEXITED(wstatus))
+// 				return_value = WEXITSTATUS(wstatus);
+// 			else
+// 				return_value = 128 + WTERMSIG(wstatus);
+// 		}
+// 	}
+// 	return (return_value);
+// }
 
 int	main(int argc, char **argv, char **env)
 {
@@ -116,6 +143,18 @@ int	main(int argc, char **argv, char **env)
 			break ;
 	}
 	ft_free_tab(&tab);
-	return (0);
+	if (!last_pid)
+		return (0);
+	// while (wait(NULL) != -1)
+	// {
+	// 	if (errno == ECHILD)
+	// 		break ;
+	// }
+	waitpid(-1, NULL, 0);
+	return(0);
 	// return (ft_return_status(last_pid, 4)); // replace 4 by wstatus
 }
+
+// test chelou :
+//	./pipex files/file_in "grep abc" | "wc -w" files/file_out
+//  <files/file_in grep abc | wc -w >files/file_out
